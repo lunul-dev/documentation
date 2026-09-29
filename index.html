@@ -147,7 +147,7 @@
             <div class="space-y-4 border-b border-gray-800 pb-8">
                 <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-800/40 text-xs font-mono text-accentCyan">
                     <i class="fa-solid fa-server mr-1"></i>
-                    <span>Jito-Inspired Block Engine Architecture</span>
+                    <span>Block Engine Architecture</span>
                 </div>
                 <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight">Infrastructure & Low-Latency Block Engine Reference</h1>
                 <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
@@ -162,7 +162,7 @@
                     <span>System Overview</span>
                 </h2>
                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    The Lunul / Jito-inspired Block Engine architecture decouples standard mempool transaction propagation from high-performance auction execution. Validators running modified client software subscribe directly to block engine relayer streams, creating a specialized sidecar for atomic transaction bundles.
+                    The Lunul Block Engine architecture decouples standard mempool transaction propagation from high-performance auction execution. Validators running modified client software subscribe directly to block engine relayer streams, creating a specialized sidecar for atomic transaction bundles.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
                     <div class="bg-cardBg glow-border p-5 rounded-2xl space-y-2">
@@ -179,124 +179,7 @@
                     </div>
                 </div>
             </section>
-
-            <!-- 2. API Reference -->
-            <section id="api" class="space-y-6">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
-                    <span class="text-accentCyan font-mono text-lg">02.</span>
-                    <span>API Reference</span>
-                </h2>
-                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    The block engine exposes high-throughput HTTP/JSON-RPC endpoints for direct transaction and bundle relaying.
-                </p>
-                <div class="space-y-3">
-                    <div class="bg-cardBg glow-border p-4 rounded-xl font-mono text-xs sm:text-sm text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <span class="text-accentCyan font-semibold">Transactions Proxy Endpoint:</span>
-                        <span class="text-gray-400 break-all">https://mainnet.block-engine.lunul.org/api/v1/transactions</span>
-                    </div>
-                    <div class="bg-cardBg glow-border p-4 rounded-xl font-mono text-xs sm:text-sm text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                        <span class="text-accentCyan font-semibold">Bundles Relay Endpoint:</span>
-                        <span class="text-gray-400 break-all">https://mainnet.block-engine.lunul.org/api/v1/bundles</span>
-                    </div>
-                </div>
-
-                <!-- API Methods Table -->
-                <div class="overflow-x-auto rounded-2xl glow-border bg-cardBg">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="border-b border-gray-800 bg-gray-900/50 text-accentCyan font-mono text-xs">
-                                <th class="p-4">Method</th>
-                                <th class="p-4">Description</th>
-                                <th class="p-4">Rate Limit</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-800 text-gray-300">
-                            <tr>
-                                <td class="p-4 font-mono text-xs text-accentCyan">sendTransaction</td>
-                                <td class="p-4 text-xs sm:text-sm">Proxies transaction directly to the validator with MEV protection options.</td>
-                                <td class="p-4 font-mono text-xs">1 RPS / IP</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4 font-mono text-xs text-accentCyan">sendBundle</td>
-                                <td class="p-4 text-xs sm:text-sm">Submits an atomic array of up to 5 signed transactions for block auctions.</td>
-                                <td class="p-4 font-mono text-xs">5 RPS / project</td>
-                            </tr>
-                            <tr>
-                                <td class="p-4 font-mono text-xs text-accentCyan">simulateBundle</td>
-                                <td class="p-4 text-xs sm:text-sm">Simulates bundle state execution without broadcasting to the relayer.</td>
-                                <td class="p-4 font-mono text-xs">Standard RPC</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Code Example -->
-                <div class="space-y-2">
-                    <p class="text-xs font-mono text-gray-400">Example: Submitting a Transaction via cURL</p>
-                    <div class="bg-[#0c0e14] rounded-2xl glow-border p-4 overflow-x-auto font-mono text-xs text-gray-300">
-                        <pre><code>curl https://mainnet.block-engine.lunul.org/api/v1/transactions \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": 1,
-    "method": "sendTransaction",
-    "params": ["&lt;BASE64_ENCODED_TRANSACTION&gt;", {"encoding": "base64"}]
-  }'</code></pre>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 3. Getting Started -->
-            <section id="getting-started" class="space-y-6">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
-                    <span class="text-accentCyan font-mono text-lg">03.</span>
-                    <span>Getting Started</span>
-                </h2>
-                <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
-                    <p>To begin routing high-frequency transactions and bundles through the block engine, follow these steps:</p>
-                    <ol class="list-decimal list-inside space-y-2 pl-2">
-                        <li><strong class="text-gray-100">Format Encoding:</strong> Always encode fully-signed transactions using <code class="text-accentCyan">base64</code> formatting (recommended over base58 for serialization speed).</li>
-                        <li><strong class="text-gray-100">Select Tip Accounts:</strong> Retrieve active network tip accounts dynamically via <code class="text-accentCyan">getTipAccounts</code>. Randomly select one account for each submission to minimize state contention.</li>
-                        <li><strong class="text-gray-100">Include Tip Instruction:</strong> Append a native transfer instruction paying at least the protocol minimum tip (1,000 lamports for single transactions; 5,000 lamports for bundles).</li>
-                    </ol>
-                </div>
-            </section>
-
-            <!-- 4. Sandwich Mitigation -->
-            <section id="mitigation" class="space-y-6">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
-                    <span class="text-accentCyan font-mono text-lg">04.</span>
-                    <span>Sandwich Mitigation (`dontfront`)</span>
-                </h2>
-                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    Harmful MEV extraction—such as sandwich attacks where searchers front-run and back-run user swaps—is mitigated natively using the <code class="text-accentCyan">dontfront</code> account directive.
-                </p>
-                <div class="bg-cardBg glow-border p-6 rounded-2xl space-y-4">
-                    <h3 class="font-bold text-gray-100">How It Works</h3>
-                    <ul class="space-y-2 text-sm text-gray-300">
-                        <li>• <strong class="text-accentCyan">The `jitodontfront` Prefix:</strong> Any valid address starting with <code class="text-accentCyan">jitodontfront</code> can be injected as a read-only, non-signer account into your transaction.</li>
-                        <li>• <strong class="text-accentCyan">Enforced Ordering:</strong> When detected, your transaction is protected against competing front-running bundles, or if used in <code class="text-accentCyan">sendBundle</code>, must appear strictly at index 0.</li>
-                    </ul>
-                </div>
-                <!-- TypeScript Snippet -->
-                <div class="space-y-2">
-                    <p class="text-xs font-mono text-gray-400">Example: Adding a read-only DontFront account protection flag</p>
-                    <div class="bg-[#0c0e14] rounded-2xl glow-border p-4 overflow-x-auto font-mono text-xs text-gray-300">
-                        <pre><code>import { PublicKey } from '@solana/web3.js';
-
-const dontFrontPubkey = new PublicKey("jitodontfront111111111111111111111111111111");
-
-const protectionAccountMeta = {
-    pubkey: dontFrontPubkey,
-    isSigner: false,
-    isWritable: false, // Read-only optimizes landing speed
-};</code></pre>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Core Technical Architecture & Pillars Section -->
+<!-- Core Technical Architecture & Pillars Section -->
     <section id="core-architecture" class="space-y-16 py-12">
         <div class="space-y-4 border-b border-gray-800 pb-8">
             <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-800/40 text-xs font-mono text-accentCyan">
@@ -469,6 +352,123 @@ fn process_instruction(
             </div>
         </div>
     </section>
+            <!-- 2. API Reference -->
+            <section id="api" class="space-y-6">
+                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
+                    <span class="text-accentCyan font-mono text-lg">02.</span>
+                    <span>API Reference</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    The block engine exposes high-throughput HTTP/JSON-RPC endpoints for direct transaction and bundle relaying.
+                </p>
+                <div class="space-y-3">
+                    <div class="bg-cardBg glow-border p-4 rounded-xl font-mono text-xs sm:text-sm text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span class="text-accentCyan font-semibold">Transactions Proxy Endpoint:</span>
+                        <span class="text-gray-400 break-all">https://mainnet.block-engine.lunul.org/api/v1/transactions</span>
+                    </div>
+                    <div class="bg-cardBg glow-border p-4 rounded-xl font-mono text-xs sm:text-sm text-gray-300 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <span class="text-accentCyan font-semibold">Bundles Relay Endpoint:</span>
+                        <span class="text-gray-400 break-all">https://mainnet.block-engine.lunul.org/api/v1/bundles</span>
+                    </div>
+                </div>
+
+                <!-- API Methods Table -->
+                <div class="overflow-x-auto rounded-2xl glow-border bg-cardBg">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="border-b border-gray-800 bg-gray-900/50 text-accentCyan font-mono text-xs">
+                                <th class="p-4">Method</th>
+                                <th class="p-4">Description</th>
+                                <th class="p-4">Rate Limit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-800 text-gray-300">
+                            <tr>
+                                <td class="p-4 font-mono text-xs text-accentCyan">sendTransaction</td>
+                                <td class="p-4 text-xs sm:text-sm">Proxies transaction directly to the validator with MEV protection options.</td>
+                                <td class="p-4 font-mono text-xs">1 RPS / IP</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-mono text-xs text-accentCyan">sendBundle</td>
+                                <td class="p-4 text-xs sm:text-sm">Submits an atomic array of up to 5 signed transactions for block auctions.</td>
+                                <td class="p-4 font-mono text-xs">5 RPS / project</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-mono text-xs text-accentCyan">simulateBundle</td>
+                                <td class="p-4 text-xs sm:text-sm">Simulates bundle state execution without broadcasting to the relayer.</td>
+                                <td class="p-4 font-mono text-xs">Standard RPC</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Code Example -->
+                <div class="space-y-2">
+                    <p class="text-xs font-mono text-gray-400">Example: Submitting a Transaction via cURL</p>
+                    <div class="bg-[#0c0e14] rounded-2xl glow-border p-4 overflow-x-auto font-mono text-xs text-gray-300">
+                        <pre><code>curl https://mainnet.block-engine.lunul.org/api/v1/transactions \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "sendTransaction",
+    "params": ["&lt;BASE64_ENCODED_TRANSACTION&gt;", {"encoding": "base64"}]
+  }'</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Getting Started -->
+            <section id="getting-started" class="space-y-6">
+                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
+                    <span class="text-accentCyan font-mono text-lg">03.</span>
+                    <span>Getting Started</span>
+                </h2>
+                <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                    <p>To begin routing high-frequency transactions and bundles through the block engine, follow these steps:</p>
+                    <ol class="list-decimal list-inside space-y-2 pl-2">
+                        <li><strong class="text-gray-100">Format Encoding:</strong> Always encode fully-signed transactions using <code class="text-accentCyan">base64</code> formatting (recommended over base58 for serialization speed).</li>
+                        <li><strong class="text-gray-100">Select Tip Accounts:</strong> Retrieve active network tip accounts dynamically via <code class="text-accentCyan">getTipAccounts</code>. Randomly select one account for each submission to minimize state contention.</li>
+                        <li><strong class="text-gray-100">Include Tip Instruction:</strong> Append a native transfer instruction paying at least the protocol minimum tip (1,000 lamports for single transactions; 5,000 lamports for bundles).</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 4. Sandwich Mitigation -->
+            <section id="mitigation" class="space-y-6">
+                <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
+                    <span class="text-accentCyan font-mono text-lg">04.</span>
+                    <span>Sandwich Mitigation (`dontfront`)</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Harmful MEV extraction—such as sandwich attacks where searchers front-run and back-run user swaps—is mitigated natively using the <code class="text-accentCyan">dontfront</code> account directive.
+                </p>
+                <div class="bg-cardBg glow-border p-6 rounded-2xl space-y-4">
+                    <h3 class="font-bold text-gray-100">How It Works</h3>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• <strong class="text-accentCyan">The `jitodontfront` Prefix:</strong> Any valid address starting with <code class="text-accentCyan">jitodontfront</code> can be injected as a read-only, non-signer account into your transaction.</li>
+                        <li>• <strong class="text-accentCyan">Enforced Ordering:</strong> When detected, your transaction is protected against competing front-running bundles, or if used in <code class="text-accentCyan">sendBundle</code>, must appear strictly at index 0.</li>
+                    </ul>
+                </div>
+                <!-- TypeScript Snippet -->
+                <div class="space-y-2">
+                    <p class="text-xs font-mono text-gray-400">Example: Adding a read-only DontFront account protection flag</p>
+                    <div class="bg-[#0c0e14] rounded-2xl glow-border p-4 overflow-x-auto font-mono text-xs text-gray-300">
+                        <pre><code>import { PublicKey } from '@solana/web3.js';
+
+const dontFrontPubkey = new PublicKey("jitodontfront111111111111111111111111111111");
+
+const protectionAccountMeta = {
+    pubkey: dontFrontPubkey,
+    isSigner: false,
+    isWritable: false, // Read-only optimizes landing speed
+};</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            
 
             <!-- 5. Tips & Best Practices -->
             <section id="tips" class="space-y-6">
