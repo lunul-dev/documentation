@@ -296,6 +296,180 @@ const protectionAccountMeta = {
                 </div>
             </section>
 
+            <!-- Core Technical Architecture & Pillars Section -->
+    <section id="core-architecture" class="space-y-16 py-12">
+        <div class="space-y-4 border-b border-gray-800 pb-8">
+            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/30 border border-cyan-800/40 text-xs font-mono text-accentCyan">
+                <i class="fa-solid fa-microchip mr-1"></i>
+                <span>Under the Hood</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Core Technical Architecture & Engine Mechanics</h2>
+            <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
+                An exhaustive breakdown of Lunul's foundational primitives—combining multi-threaded parallel execution, zero-knowledge confidentiality, sub-second BFT consensus, and compiled WebAssembly runtimes.
+            </p>
+        </div>
+
+        <!-- 1. Sealevel Parallel Engine -->
+        <div id="sealevel-engine" class="bg-cardBg glow-border p-8 rounded-3xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-950/40 border border-cyan-800/50 flex items-center justify-center text-accentCyan text-2xl shadow-inner">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-100">1. Sealevel Parallel Engine</h3>
+                        <p class="text-xs font-mono text-gray-400">Multi-Threaded Concurrent Execution Runtime</p>
+                    </div>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-darkBg glow-border text-xs font-mono text-accentCyan flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-accentCyan animate-ping"></span>
+                    <span>Peak Throughput: 50,000+ TPS</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                    Unlike traditional single-threaded Virtual Machines (such as the standard Ethereum EVM) which process state transitions sequentially and create severe gas fee bottlenecks during high network congestion, <strong class="text-gray-100">Lunul</strong> utilizes a customized variant of the <strong class="text-accentCyan">Solana Sealevel parallel execution runtime</strong>.
+                </p>
+                <p>
+                    Sealevel is the world's first parallel smart contract runtime. It allows thousands of non-overlapping smart contracts to execute simultaneously across multi-core validator hardware.
+                </p>
+
+                <div class="bg-darkBg/60 p-6 rounded-2xl border border-gray-800 space-y-3">
+                    <h4 class="text-sm font-bold text-accentCyan font-mono uppercase tracking-wider">How Sealevel Achieves Parallelism</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-gray-400">
+                        <li>• <strong class="text-gray-200">Explicit Account Declarations:</strong> Transactions on Lunul must declare precisely which accounts they intend to read and write prior to execution.</li>
+                        <li>• <strong class="text-gray-200">Conflict-Free Scheduling:</strong> The runtime scheduler analyzes account locking states in real-time. If Transaction A reads/writes Account X and Transaction B reads/writes Account Y, the scheduler dispatches them to distinct CPU threads to run concurrently without race conditions.</li>
+                        <li>• <strong class="text-gray-200">Hardware Scaling:</strong> Validator node performance scales directly with core count upgrades, enabling sustained high-frequency throughput.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. ZK-UTXO Privacy Circuits -->
+        <div id="zk-privacy" class="bg-cardBg glow-border p-8 rounded-3xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-950/40 border border-cyan-800/50 flex items-center justify-center text-accentCyan text-2xl shadow-inner">
+                        <i class="fa-solid fa-user-secret"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-100">2. ZK-UTXO Privacy Circuits</h3>
+                        <p class="text-xs font-mono text-gray-400">Zero-Knowledge Confidentiality & Pedersen Commitments</p>
+                    </div>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-darkBg glow-border text-xs font-mono text-accentCyan flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-accentCyan"></span>
+                    <span>Confidentiality: 100% Shielded</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                    To guarantee absolute user privacy without sacrificing verifiable ledger integrity or creating inflationary risks, Lunul integrates an advanced <strong class="text-accentCyan">Zero-Knowledge Unspent Transaction Output (ZK-UTXO)</strong> architecture.
+                </p>
+                <p>
+                    Leverages advanced zero-knowledge proofs and Pedersen commitments to conceal sender balances, recipient addresses, and transferred amounts while ensuring bulletproof mathematical integrity.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-darkBg/60 p-5 rounded-2xl border border-gray-800 space-y-2">
+                        <div class="text-accentCyan font-mono text-xs uppercase tracking-wider">Pedersen Commitments</div>
+                        <p class="text-gray-400 text-xs sm:text-sm">Blinds transaction values cryptographically. Public ledger observers see state transitions occur, but actual balances and transferred amounts remain entirely hidden.</p>
+                    </div>
+                    <div class="bg-darkBg/60 p-5 rounded-2xl border border-gray-800 space-y-2">
+                        <div class="text-accentCyan font-mono text-xs uppercase tracking-wider">zk-SNARK Verification</div>
+                        <p class="text-gray-400 text-xs sm:text-sm">Client wallets generate local mathematical proofs validating that input ownership is authentic and that input sums equal output sums, preventing double-spending.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Fee-Only BFT Consensus -->
+        <div id="bft-consensus" class="bg-cardBg glow-border p-8 rounded-3xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-950/40 border border-cyan-800/50 flex items-center justify-center text-accentCyan text-2xl shadow-inner">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-100">3. Fee-Only BFT Consensus</h3>
+                        <p class="text-xs font-mono text-gray-400">Byzantine Fault Tolerant Proof-of-Stake Engine</p>
+                    </div>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-darkBg glow-border text-xs font-mono text-accentCyan flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-accentCyan"></span>
+                    <span>Deterministic Finality: &lt; 400ms</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                    A robust Byzantine Fault Tolerant Proof-of-Stake consensus mechanism ensuring fast slot validation times, predictable transaction fees, and absolute resistance to chain reorganizations.
+                </p>
+                <div class="bg-darkBg/60 p-6 rounded-2xl border border-gray-800 space-y-3">
+                    <h4 class="text-sm font-bold text-accentCyan font-mono uppercase tracking-wider">Consensus Security Guarantees</h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-gray-400">
+                        <li>• <strong class="text-gray-200">Dynamic Slot Leaders:</strong> Validators are algorithmically rotated based on bonded native token stakes to propose blocks at ultra-fast slot intervals.</li>
+                        <li>• <strong class="text-gray-200">Re-org Immunity:</strong> Strict BFT locking thresholds prevent validator supermajorities from signing conflicting forks, ensuring immediate settlement confidence.</li>
+                        <li>• <strong class="text-gray-200">Hardware-Accelerated Hashing:</strong> Utilizes optimized Poseidon and SHA-256 hashing primitives to accelerate proof verification loops.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. WASM Smart Contracts -->
+        <div id="wasm-contracts" class="bg-cardBg glow-border p-8 rounded-3xl space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
+                <div class="flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-950/40 border border-cyan-800/50 flex items-center justify-center text-accentCyan text-2xl shadow-inner">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-100">4. WASM Smart Contracts</h3>
+                        <p class="text-xs font-mono text-gray-400">WebAssembly Execution Runtime & Systems Tooling</p>
+                    </div>
+                </div>
+                <div class="px-4 py-2 rounded-xl bg-darkBg glow-border text-xs font-mono text-accentCyan flex items-center space-x-2">
+                    <span class="w-2 h-2 rounded-full bg-accentCyan"></span>
+                    <span>Execution: Near Native Speed</span>
+                </div>
+            </div>
+
+            <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                <p>
+                    Write high-performance decentralized applications in modern languages like Rust and C++ compiled directly to optimized WebAssembly runtimes.
+                </p>
+
+                <!-- Code Block Example -->
+                <div class="space-y-2 pt-2">
+                    <p class="text-xs font-mono text-gray-400">Example: Rust Contract Entrypoint</p>
+                    <div class="bg-[#0c0e14] rounded-2xl glow-border p-4 overflow-x-auto font-mono text-xs text-gray-300">
+                        <pre><code>use lunul_program::{
+    account_info::AccountInfo,
+    entrypoint,
+    entrypoint::ProgramResult,
+    msg,
+    pubkey::Pubkey,
+    program_error::ProgramError,
+};
+
+entrypoint!(process_instruction);
+
+fn process_instruction(
+    program_id: &Pubkey,
+    accounts: &[AccountInfo],
+    instruction_data: &[u8],
+) -> ProgramResult {
+    msg!("Lunul WASM smart contract execution initialized.");
+    Ok(())
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
             <!-- 5. Tips & Best Practices -->
             <section id="tips" class="space-y-6">
                 <h2 class="text-2xl font-bold tracking-tight text-gray-100 flex items-center space-x-3">
