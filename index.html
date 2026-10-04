@@ -44,7 +44,7 @@
       box-shadow: 0 6px 28px rgba(147, 51, 234, 0.6);
       transform: translateY(-1px);
     }
-    /* Custom Scrollbar for Docs Sidebar */
+    /* Custom Scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -77,11 +77,11 @@
       </div>
     </a>
 
-    <!-- Nav Links & Search -->
+    <!-- Nav Links -->
     <div class="hidden md:flex items-center gap-6 text-xs font-mono-code font-semibold text-slate-300">
       <a href="#architecture" class="hover:text-purple-400 transition">Architecture</a>
       <a href="#consensus" class="hover:text-purple-400 transition">Consensus</a>
-      <a href="#smart-contracts" class="hover:text-purple-400 transition">Smart Contracts</a>
+      <a href="#accounts" class="hover:text-purple-400 transition">State Model</a>
       <a href="#sdk" class="hover:text-purple-400 transition">SDK & RPC</a>
     </div>
 
@@ -90,7 +90,7 @@
         <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
           <i class="fa-solid fa-magnifying-glass text-xs"></i>
         </span>
-        <input type="text" placeholder="Search docs (Ctrl + K)..." class="bg-zinc-900 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs font-mono-code text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-48 lg:w-64 transition">
+        <input type="text" placeholder="Search docs..." class="bg-zinc-900 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs font-mono-code text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-44 lg:w-60 transition">
       </div>
       <a href="https://app.lunul.org" class="btn-lunul text-white font-semibold px-4 py-2 rounded-xl text-xs font-mono-code flex items-center gap-2">
         <span>Launch App</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
@@ -107,34 +107,43 @@
         <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Getting Started</h5>
         <ul class="space-y-2 border-l border-white/10 pl-3">
           <li><a href="#overview" class="text-purple-400 font-semibold block transition">Introduction to Lunul</a></li>
-          <li><a href="#architecture" class="text-slate-400 hover:text-white block transition">Protocol Architecture</a></li>
-          <li><a href="#network" class="text-slate-400 hover:text-white block transition">Nodes & Validators</a></li>
+          <li><a href="#core-principles" class="text-slate-400 hover:text-white block transition">Core Design Principles</a></li>
+          <li><a href="#tokenomics" class="text-slate-400 hover:text-white block transition">Token Utility & Fees</a></li>
         </ul>
       </div>
 
       <div>
-        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Core Mechanics</h5>
+        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Protocol Mechanics</h5>
         <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#consensus" class="text-slate-400 hover:text-white block transition">Proof-of-State Consensus</a></li>
-          <li><a href="#accounts" class="text-slate-400 hover:text-white block transition">State & Account Model</a></li>
-          <li><a href="#transactions" class="text-slate-400 hover:text-white block transition">Transaction Execution</a></li>
+          <li><a href="#architecture" class="text-slate-400 hover:text-white block transition">State Separation Architecture</a></li>
+          <li><a href="#consensus" class="text-slate-400 hover:text-white block transition">Proof-of-State & VDFs</a></li>
+          <li><a href="#accounts" class="text-slate-400 hover:text-white block transition">Account & Rent Model</a></li>
+          <li><a href="#parallel-runtime" class="text-slate-400 hover:text-white block transition">Parallel Transaction Engine</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Validator Operations</h5>
+        <ul class="space-y-2 border-l border-white/10 pl-3">
+          <li><a href="#validator-reqs" class="text-slate-400 hover:text-white block transition">Hardware Requirements</a></li>
+          <li><a href="#staking" class="text-slate-400 hover:text-white block transition">Delegation & Slashing</a></li>
         </ul>
       </div>
 
       <div>
         <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Developer Stack</h5>
         <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#smart-contracts" class="text-slate-400 hover:text-white block transition">Smart Contracts & EVM</a></li>
-          <li><a href="#sdk" class="text-slate-400 hover:text-white block transition">Lunul SDK & Client APIs</a></li>
-          <li><a href="#security" class="text-slate-400 hover:text-white block transition">Audits & Security Best Practices</a></li>
+          <li><a href="#smart-contracts" class="text-slate-400 hover:text-white block transition">Smart Contract Environment</a></li>
+          <li><a href="#sdk" class="text-slate-400 hover:text-white block transition">TypeScript SDK & RPC</a></li>
+          <li><a href="#security" class="text-slate-400 hover:text-white block transition">Security Audits & Testing</a></li>
         </ul>
       </div>
     </aside>
 
     <!-- Center Main Content Area -->
-    <main class="lg:col-span-9 space-y-12">
+    <main class="lg:col-span-9 space-y-16">
       
-      <!-- Introduction Section -->
+      <!-- 1. Introduction Section -->
       <section id="overview" class="space-y-4">
         <div class="flex items-center gap-2 text-xs font-mono-code text-purple-400 font-bold">
           <i class="fa-solid fa-book-open"></i> GETTING STARTED / INTRODUCTION
@@ -143,99 +152,141 @@
           Introduction to <span class="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Lunul Foundation</span>
         </h1>
         <p class="text-slate-300 text-sm leading-relaxed">
-          Lunul Foundation (LF) is a high-throughput, horizontally scalable layer-1 blockchain protocol engineered for institutional-grade decentralized finance, ultra-low latency execution, and secure cross-chain composability. By combining deterministic finality with advanced state separation, Lunul provides developers and institutions with an uncompromised execution environment.
+          Lunul Foundation (<span class="font-bold text-white">LF</span>) is a high-throughput, horizontally scalable Layer-1 blockchain protocol engineered for institutional-grade decentralized finance, ultra-low latency orderbook execution, and secure cross-chain interoperability. By combining deterministic sub-second finality with advanced state separation, Lunul provides developers and global enterprises with an uncompromising execution environment.
         </p>
 
-        <!-- Quick Callout Box -->
+        <!-- Callout Box -->
         <div class="cardBg border border-purple-500/30 rounded-2xl p-5 my-6 flex items-start gap-4">
           <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 flex-shrink-0 mt-0.5">
             <i class="fa-solid fa-lightbulb"></i>
           </div>
           <div class="space-y-1">
-            <h4 class="text-xs font-bold font-mono-code text-white">Core Protocol Spec</h4>
+            <h4 class="text-xs font-bold font-mono-code text-white">Protocol Specification Highlights</h4>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Lunul achieves sub-second block confirmation times while maintaining absolute security guarantees through its validated asynchronous state machine replication protocol.
+              Lunul achieves up to 65,000 transactions per second (TPS) with an average slot time of 200 milliseconds, ensuring zero mempool congestion during high-volatility market events.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Architecture Section -->
-      <section id="architecture" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Protocol Architecture</h2>
+      <!-- 2. Core Principles -->
+      <section id="core-principles" class="space-y-6 pt-6 border-t border-white/10">
+        <h2 class="text-2xl font-extrabold text-white tracking-tight">Core Design Principles</h2>
         <p class="text-slate-300 text-sm leading-relaxed">
-          Unlike legacy monolithic chains where computation and data storage are tightly coupled inside smart contracts, Lunul's architecture separates execution logic from persistent state storage.
+          The Lunul protocol architecture is built upon three foundational pillars designed to eliminate blockchain trilemma bottlenecks:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-purple-400 font-bold">01</div>
+            <h3 class="text-sm font-bold text-white">Hardware Scaling</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Network throughput scales proportionally with validator hardware advancements, avoiding artificial software gas limits.
+            </p>
+          </div>
+          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold">02</div>
+            <h3 class="text-sm font-bold text-white">Deterministic Execution</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Transactions declare all read/write states beforehand, allowing parallel CPU execution without race conditions.
+            </p>
+          </div>
+          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-950 flex items-center justify-center text-emerald-400 font-bold">03</div>
+            <h3 class="text-sm font-bold text-white">Economic Predictability</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Fee markets are localized per smart contract account, preventing congested NFT mints from spiking global gas fees.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Protocol Architecture -->
+      <section id="architecture" class="space-y-6 pt-6 border-t border-white/10">
+        <h2 class="text-2xl font-extrabold text-white tracking-tight">State Separation Architecture</h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Unlike legacy monolithic chains where computation and data storage are bundled together, Lunul separates executable logic from persistent state storage.
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
             <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-purple-400">
-              <i class="fa-solid fa-microchip"></i>
+              <i class="fa-solid fa-code"></i>
             </div>
-            <h3 class="text-sm font-bold text-white">Stateless Programs</h3>
+            <h3 class="text-sm font-bold text-white">Stateless Executable Programs</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Programs (smart contracts) contain executable bytecode only. All runtime data is stored in isolated, program-owned accounts, unlocking massive parallel transaction execution.
+              Smart contracts on Lunul are read-only programs containing immutable bytecode. They accept instructions, execute business logic, and mutate state externally.
             </p>
           </div>
 
           <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
             <div class="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400">
-              <i class="fa-solid fa-database"></i>
+              <i class="fa-solid fa-vault"></i>
             </div>
-            <h3 class="text-sm font-bold text-white">Deterministic Account Model</h3>
+            <h3 class="text-sm font-bold text-white">Isolated Data Accounts</h3>
             <p class="text-xs text-slate-400 leading-relaxed">
-              Every account explicitly declares its read/write dependencies upfront in transaction headers, allowing the runtime scheduler to optimize CPU core allocation.
+              All runtime variables, user balances, and application data reside inside discrete storage accounts owned by specific programs.
             </p>
           </div>
         </div>
       </section>
 
-      <!-- Consensus Section -->
+      <!-- 4. Consensus & VDFs -->
       <section id="consensus" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Proof-of-State Consensus</h2>
+        <h2 class="text-2xl font-extrabold text-white tracking-tight">Proof-of-State Consensus & VDFs</h2>
         <p class="text-slate-300 text-sm leading-relaxed">
-          Lunul utilizes an optimized BFT (Byzantine Fault Tolerant) consensus engine paired with cryptographic verifiable delay functions (VDFs) to order transactions without inter-node chatter latency.
+          Lunul utilizes an optimized BFT consensus mechanism powered by cryptographic Verifiable Delay Functions (VDFs). This establishes a tamper-proof historical record of time without requiring validators to continuously gossip with one another.
         </p>
 
         <div class="cardBg border border-white/10 rounded-2xl p-6 space-y-4">
-          <h3 class="text-xs font-mono-code font-bold text-purple-300 uppercase tracking-wider">Consensus Metrics</h3>
+          <h3 class="text-xs font-mono-code font-bold text-purple-300 uppercase tracking-wider">Network Performance Parameters</h3>
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-code">
             <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">FINALITY</div>
+              <div class="text-[10px] text-slate-500 mb-1">FINALITY TIME</div>
               <div class="text-lg font-bold text-white">&lt; 400ms</div>
             </div>
             <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">THROUGHPUT</div>
+              <div class="text-[10px] text-slate-500 mb-1">PEAK THROUGHPUT</div>
               <div class="text-lg font-bold text-white">65,000 TPS</div>
             </div>
             <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">SLOT TIME</div>
+              <div class="text-[10px] text-slate-500 mb-1">SLOT DURATION</div>
               <div class="text-lg font-bold text-white">200ms</div>
             </div>
             <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">VALIDATORS</div>
+              <div class="text-[10px] text-slate-500 mb-1">ACTIVE VALIDATORS</div>
               <div class="text-lg font-bold text-white">1,450+</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SDK & Code Example Section -->
+      <!-- 5. Parallel Transaction Engine -->
+      <section id="parallel-runtime" class="space-y-6 pt-6 border-t border-white/10">
+        <h2 class="text-2xl font-extrabold text-white tracking-tight">Parallel Transaction Execution Engine</h2>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Traditional blockchains process transactions sequentially, creating severe bottlenecks. Lunul implements a concurrency engine modeled after database concurrency control systems.
+        </p>
+        <p class="text-slate-300 text-sm leading-relaxed">
+          Transactions that do not overlap in their account state dependencies are processed concurrently across multi-core validator CPUs, allowing non-conflicting decentralized exchanges, lending pools, and NFT marketplaces to execute simultaneously in the exact same block.
+        </p>
+      </section>
+
+      <!-- 6. Developer SDK & Code Example -->
       <section id="sdk" class="space-y-6 pt-6 border-t border-white/10">
         <h2 class="text-2xl font-extrabold text-white tracking-tight">Lunul SDK Quickstart</h2>
         <p class="text-slate-300 text-sm leading-relaxed">
-          Interact with the Lunul network programmatically using the official TypeScript client library.
+          Interact with the Lunul network programmatically using the official TypeScript client library to deploy accounts, query state, and submit signed transactions.
         </p>
 
         <!-- Code Block Component -->
         <div class="rounded-2xl bg-black border border-white/10 overflow-hidden shadow-2xl font-mono-code text-xs">
           <div class="bg-zinc-900 px-4 py-3 border-b border-white/10 flex justify-between items-center text-slate-400">
             <span class="flex items-center gap-2"><i class="fa-brands fa-js text-amber-400"></i> client_transfer.ts</span>
-            <span class="text-[10px] text-purple-400">TypeScript</span>
+            <span class="text-[10px] text-purple-400">TypeScript v6.2</span>
           </div>
           <pre class="p-5 overflow-x-auto text-slate-300 leading-relaxed"><code><span class="text-purple-400">import</span> { LunulClient, clusterApiUrl, LAMPORTS_PER_LUN } <span class="text-purple-400">from</span> <span class="text-emerald-300">'@lunul/web3.js'</span>;
 
-<span class="text-slate-500">// Initialize connection to Lunul Mainnet-Beta</span>
+<span class="text-slate-500">// Initialize connection to Lunul Mainnet-Beta RPC cluster</span>
 <span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> <span class="text-amber-300">LunulClient</span>(<span class="text-amber-300">clusterApiUrl</span>(<span class="text-emerald-300">'mainnet-beta'</span>));
 
 <span class="text-purple-400">async function</span> <span class="text-blue-400">executeTransfer</span>(senderWallet, recipientKey) {
@@ -244,7 +295,8 @@
   <span class="text-purple-400">const</span> txSignature = <span class="text-purple-400">await</span> client.<span class="text-blue-300">transferSOL</span>({
     sender: senderWallet,
     recipient: recipientKey,
-    lamports: transferAmount
+    lamports: transferAmount,
+    commitment: <span class="text-emerald-300">'confirmed'</span>
   });
 
   <span class="text-blue-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-emerald-300">`Transaction confirmed with signature: ${txSignature}`</span>);
@@ -262,6 +314,7 @@
     <div class="flex items-center gap-6">
       <a href="https://lunul.org" class="hover:text-white transition">Ecosystem</a>
       <a href="https://whitepaper.lunul.org" class="hover:text-white transition">Whitepaper</a>
+      <a href="https://app.lunul.org" class="hover:text-white transition">Battlepass</a>
       <a href="https://x.com/lunulfoundation" class="hover:text-white transition"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a>
     </div>
   </footer>
