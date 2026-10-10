@@ -1,420 +1,278 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Documentation | Lunul Foundation Protocol</title>
-
-  <!-- Google Fonts & Tailwind CSS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunul Foundation | Technical Documentation</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { purple: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' } } } } }
+  </script>
   <style>
-    body {
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #030207;
-      color: #f3f4f6;
-      overflow-x: hidden;
-      min-height: 100vh;
-      scroll-behavior: smooth;
-    }
-    .font-mono-code {
-      font-family: 'JetBrains Mono', monospace;
-    }
-    .lunul-glow {
-      background: radial-gradient(circle at 50% -10%, rgba(147, 51, 234, 0.2) 0%, rgba(10, 10, 18, 0.98) 40%, #030207 100%);
-    }
-    .cardBg {
-      background: rgba(12, 10, 20, 0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
-    }
-    .btn-lunul {
-      background: linear-gradient(135deg, #9333ea 0%, #4f46e5 100%);
-      box-shadow: 0 4px 20px rgba(147, 51, 234, 0.35);
-      transition: all 0.25s ease;
-    }
-    .btn-lunul:hover {
-      box-shadow: 0 6px 28px rgba(147, 51, 234, 0.6);
-      transform: translateY(-1px);
-    }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: rgba(3, 2, 7, 0.8);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(147, 51, 234, 0.3);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(147, 51, 234, 0.6);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono-code { font-family: 'JetBrains Mono', monospace; }
+    html { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="lunul-glow flex flex-col justify-between selection:bg-purple-500 selection:text-white">
+<body class="bg-black text-slate-100 min-h-screen selection:bg-purple-500 selection:text-white flex flex-col justify-between overflow-x-hidden">
 
-  <!-- Shared Header Navbar -->
-  <header class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-5 flex justify-between items-center gap-4 border-b border-white/10 sticky top-0 z-50 bg-[#030207]/80 backdrop-blur-xl">
-    <a href="https://lunul.org" class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-emerald-500 flex items-center justify-center font-extrabold text-white text-xl shadow-lg">
-        L
-      </div>
-      <div class="flex flex-col">
-        <span class="text-xl font-extrabold tracking-tight text-white flex items-center gap-2">
-          LUNUL <span class="text-[10px] bg-purple-950 text-purple-300 border border-purple-500/40 px-2 py-0.5 rounded-md font-mono-code font-bold">DOCS</span>
-        </span>
-        <span class="text-[10px] text-purple-400 font-mono-code font-semibold">FOUNDATION PROTOCOL</span>
-      </div>
-    </a>
+  <!-- EXACT MATCH GLOBAL HEADER NAVIGATION -->
+  <header class="border-b border-white/10 bg-black/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-6">
+        <a href="https://lunul.org/index.html" class="flex items-center space-x-3">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg shadow-purple-500/30">L</div>
+          <span class="font-extrabold tracking-wider text-white hidden sm:inline font-mono-code">LUNUL FOUNDATION</span>
+        </a>
 
-    <!-- Nav Links -->
-    <div class="hidden md:flex items-center gap-6 text-xs font-mono-code font-semibold text-slate-300">
-      <a href="#architecture" class="hover:text-purple-400 transition">Architecture</a>
-      <a href="#consensus" class="hover:text-purple-400 transition">Consensus</a>
-      <a href="#accounts" class="hover:text-purple-400 transition">State Model</a>
-      <a href="#validator-reqs" class="hover:text-purple-400 transition">Validators</a>
-      <a href="#sdk" class="hover:text-purple-400 transition">SDK & RPC</a>
+        <!-- DESKTOP NAV -->
+        <nav class="hidden lg:flex items-center space-x-1 font-mono-code text-xs">
+          <a href="https://lunul.org/index.html#architecture" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Architecture</a>
+          <a href="https://lunul.org/index.html#use-cases" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
+          <a href="https://docs.lunul.org" class="px-3 py-2 rounded-lg bg-white/10 text-white transition">Docs</a>
+          <a href="https://whitepaper.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Whitepaper</a>
+          <a href="https://portal.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Portal</a>
+        </nav>
+      </div>
+
+      <div class="flex items-center space-x-3 font-mono-code text-xs">
+        <a href="https://portal.lunul.org/creator.html" class="bg-purple-600 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded-xl transition shadow-lg shadow-purple-500/20 flex items-center space-x-2">
+          <span>Launch App 🚀</span>
+        </a>
+        
+        <!-- MOBILE BURGER TOGGLE BUTTON -->
+        <button onclick="toggleMobileMenu()" class="lg:hidden p-2 text-slate-300 hover:text-white focus:outline-none cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
     </div>
 
-    <div class="flex items-center gap-3">
-      <div class="relative hidden sm:block">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
-          <i class="fa-solid fa-magnifying-glass text-xs"></i>
-        </span>
-        <input type="text" placeholder="Search docs..." class="bg-zinc-900 border border-white/10 rounded-xl pl-9 pr-4 py-2 text-xs font-mono-code text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 w-40 lg:w-56 transition">
-      </div>
-      <a href="https://app.lunul.org" class="btn-lunul text-white font-semibold px-4 py-2 rounded-xl text-xs font-mono-code flex items-center gap-2">
-        <span>Launch App</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
-      </a>
+    <!-- MOBILE DROPDOWN MENU -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-b border-white/10 px-6 py-4 space-y-2 font-mono-code text-xs">
+      <a href="https://lunul.org/index.html#architecture" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Architecture</a>
+      <a href="https://lunul.org/index.html#use-cases" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
+      <a href="https://docs.lunul.org" class="block px-3 py-2 rounded-lg bg-white/10 text-white transition">Docs</a>
+      <a href="https://whitepaper.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Whitepaper</a>
+      <a href="https://portal.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Portal</a>
     </div>
   </header>
 
-  <!-- Documentation Layout Container -->
-  <div class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 py-8">
+  <!-- DOCS LAYOUT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-6 py-12 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-10">
     
-    <!-- Left Sidebar Navigation -->
-    <aside class="hidden lg:block lg:col-span-3 sticky top-24 h-[calc(100vh-7rem)] overflow-y-auto pr-4 space-y-8 font-mono-code text-xs">
-      <div>
-        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Getting Started</h5>
-        <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#overview" class="text-purple-400 font-semibold block transition">Introduction to Lunul</a></li>
-          <li><a href="#core-principles" class="text-slate-400 hover:text-white block transition">Core Design Principles</a></li>
-          <li><a href="#tokenomics" class="text-slate-400 hover:text-white block transition">Token Utility & Fees</a></li>
-        </ul>
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="hidden lg:block space-y-6 font-mono-code text-xs sticky top-24 h-[calc(100vh-7rem)] overflow-y-auto pr-4 border-r border-white/10">
+      <div class="space-y-1">
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Getting Started</div>
+        <a href="#intro" class="block px-3 py-2 rounded-lg bg-white/5 text-white transition">Introduction to Lunul</a>
+        <a href="#principles" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Core Design Principles</a>
+        <a href="#evm-zk" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">EVM & ZK-UTXO Privacy</a>
       </div>
 
-      <div>
-        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Protocol Mechanics</h5>
-        <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#architecture" class="text-slate-400 hover:text-white block transition">State Separation Architecture</a></li>
-          <li><a href="#consensus" class="text-slate-400 hover:text-white block transition">Proof-of-State & VDFs</a></li>
-          <li><a href="#accounts" class="text-slate-400 hover:text-white block transition">Account & Rent Model</a></li>
-          <li><a href="#parallel-runtime" class="text-slate-400 hover:text-white block transition">Parallel Transaction Engine</a></li>
-        </ul>
+      <div class="space-y-1 pt-2">
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Protocol Mechanics</div>
+        <a href="#vpn-wallet" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Wallet VPN & Anonymity</a>
+        <a href="#state-rent" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">State Rent & Storage</a>
+        <a href="#consensus" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">BFT Consensus & Fees</a>
       </div>
 
-      <div>
-        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Validator Operations</h5>
-        <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#validator-reqs" class="text-slate-400 hover:text-white block transition">Hardware Requirements</a></li>
-          <li><a href="#staking" class="text-slate-400 hover:text-white block transition">Delegation & Slashing</a></li>
-        </ul>
+      <div class="space-y-1 pt-2">
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Validator Operations</div>
+        <a href="#hardware" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Hardware Requirements</a>
+        <a href="#slashing" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Delegation & Slashing</a>
       </div>
 
-      <div>
-        <h5 class="text-slate-500 uppercase tracking-wider font-bold mb-3 text-[10px]">Developer Stack</h5>
-        <ul class="space-y-2 border-l border-white/10 pl-3">
-          <li><a href="#smart-contracts" class="text-slate-400 hover:text-white block transition">Smart Contract Environment</a></li>
-          <li><a href="#sdk" class="text-slate-400 hover:text-white block transition">TypeScript SDK & RPC</a></li>
-          <li><a href="#security" class="text-slate-400 hover:text-white block transition">Security Audits & Testing</a></li>
-        </ul>
+      <div class="space-y-1 pt-2">
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Developer Stack</div>
+        <a href="#smart-contracts" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Shielded Solidity & EVM</a>
+        <a href="#zk-circuits" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">ZK Circuit Integration</a>
       </div>
     </aside>
 
-    <!-- Center Main Content Area -->
-    <main class="lg:col-span-9 space-y-20">
+    <!-- MAIN CONTENT AREA -->
+    <div class="lg:col-span-3 space-y-12">
       
-      <!-- 1. Introduction -->
-      <section id="overview" class="space-y-4">
-        <div class="flex items-center gap-2 text-xs font-mono-code text-purple-400 font-bold">
-          <i class="fa-solid fa-book-open"></i> GETTING STARTED / INTRODUCTION
+      <!-- HERO BANNER -->
+      <div class="relative overflow-hidden rounded-3xl bg-zinc-950/60 backdrop-blur-xl border border-white/10 p-8 sm:p-12 space-y-4 shadow-2xl shadow-purple-500/10">
+        <div class="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 space-y-3 font-mono-code">
+          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full inline-block">
+            DEVELOPER & PROTOCOL DOCUMENTATION
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Lunul Foundation Documentation
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed max-w-2xl">
+            Comprehensive technical guides for building confidential decentralized applications, deploying EVM smart contracts, and utilizing corporate privacy-as-a-service on the Null Net protocol.
+          </p>
         </div>
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-          Introduction to <span class="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">Lunul Foundation</span>
-        </h1>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Lunul Foundation (<span class="font-bold text-white">LF</span>) is a high-throughput, horizontally scalable Layer-1 blockchain protocol engineered for institutional-grade decentralized finance, ultra-low latency orderbook execution, and secure cross-chain interoperability. By combining deterministic sub-second finality with advanced state separation, Lunul provides developers and global enterprises with an uncompromising execution environment.
-        </p>
+      </div>
 
-        <div class="cardBg border border-purple-500/30 rounded-2xl p-5 my-6 flex items-start gap-4">
-          <div class="w-10 h-10 rounded-xl bg-purple-950/80 border border-purple-500/40 flex items-center justify-center text-purple-300 flex-shrink-0 mt-0.5">
-            <i class="fa-solid fa-lightbulb"></i>
-          </div>
-          <div class="space-y-1">
-            <h4 class="text-xs font-bold font-mono-code text-white">Protocol Specification Highlights</h4>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Lunul achieves up to 65,000 transactions per second (TPS) with an average slot time of 200 milliseconds, ensuring zero mempool congestion during high-volatility market events.
-            </p>
-          </div>
+      <!-- SECTION 1 -->
+      <section id="intro" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">#</span>
+          <span>Introduction to Lunul Foundation</span>
+        </h2>
+        <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            <strong class="text-white">Lunul Foundation (LF)</strong> is an institutional-grade, private EVM Layer-1 blockchain protocol designed specifically as a corporate privacy-as-a-service provider. Operating as a secure <strong class="text-purple-400">VPN for your wallet</strong>, Lunul empowers banks, corporations, DAOs, and high-net-worth entities with lightning-fast transaction execution paired with absolute financial confidentiality.
+          </p>
+          <p>
+            By combining full Ethereum Virtual Machine (EVM) compatibility with zero-knowledge UTXO (ZK-UTXO) circuits and Pedersen commitments, developers can deploy standard Solidity contracts that execute under complete cryptographic shielding.
+          </p>
         </div>
-      </section>
 
-      <!-- 2. Core Principles -->
-      <section id="core-principles" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Core Design Principles</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          The Lunul protocol architecture is built upon three foundational pillars designed to eliminate blockchain trilemma bottlenecks:
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-purple-400 font-bold">01</div>
-            <h3 class="text-sm font-bold text-white">Hardware Scaling</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Network throughput scales proportionally with validator hardware advancements, avoiding artificial software gas limits.
-            </p>
+        <!-- NETWORK PARAMETERS GRID -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 font-mono-code text-center">
+          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
+            <span class="text-[10px] text-slate-400 uppercase">Finality Time</span>
+            <div class="text-xl font-extrabold text-purple-400">&lt; 400ms</div>
           </div>
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <div class="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400 font-bold">02</div>
-            <h3 class="text-sm font-bold text-white">Deterministic Execution</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Transactions declare all read/write states beforehand, allowing parallel CPU execution without race conditions.
-            </p>
+          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
+            <span class="text-[10px] text-slate-400 uppercase">Peak TPS</span>
+            <div class="text-xl font-extrabold text-white">50,000+</div>
           </div>
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <div class="w-8 h-8 rounded-lg bg-emerald-950 flex items-center justify-center text-emerald-400 font-bold">03</div>
-            <h3 class="text-sm font-bold text-white">Economic Predictability</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Fee markets are localized per smart contract account, preventing congested NFT mints from spiking global gas fees.
-            </p>
+          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
+            <span class="text-[10px] text-slate-400 uppercase">Confidentiality</span>
+            <div class="text-xl font-extrabold text-emerald-400">100% ZK</div>
+          </div>
+          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
+            <span class="text-[10px] text-slate-400 uppercase">EVM Status</span>
+            <div class="text-xl font-extrabold text-purple-300">Native</div>
           </div>
         </div>
       </section>
 
-      <!-- 3. Tokenomics -->
-      <section id="tokenomics" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Token Utility & Fee Economics</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          The native utility token <span class="font-mono-code text-purple-300">$LUN</span> powers the Lunul Foundation network across multiple economic layers: validator staking security, priority transaction fee burns, and on-chain governance proposals.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-2">
-            <h3 class="text-xs font-mono-code font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-fire text-orange-400"></i> Priority Fee Burns
-            </h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              A percentage of base transaction fees are permanently burned, creating deflationary pressure proportional to network utilization.
-            </p>
-          </div>
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-2">
-            <h3 class="text-xs font-mono-code font-bold text-white flex items-center gap-2">
-              <i class="fa-solid fa-coins text-amber-400"></i> Validator Rewards
-            </h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Stakers earn protocol-subsidized inflation rewards by delegating $LUN to active consensus nodes, securing network finality.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 4. Architecture -->
-      <section id="architecture" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">State Separation Architecture</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Unlike legacy monolithic chains where computation and data storage are bundled together, Lunul separates executable logic from persistent state storage.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <div class="w-8 h-8 rounded-lg bg-purple-950 flex items-center justify-center text-purple-400">
-              <i class="fa-solid fa-code"></i>
+      <!-- SECTION 2: EVM & ZK-UTXO PRIVACY -->
+      <section id="evm-zk" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">1.</span>
+          <span>EVM Compatibility & ZK-UTXO Privacy Circuits</span>
+        </h2>
+        <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            Legacy privacy chains often force developers to learn custom virtual machines or exotic programming languages. Lunul bridges this gap by offering native EVM runtime support combined with zero-knowledge circuits.
+          </p>
+          <div class="space-y-3 font-mono-code text-xs pt-2">
+            <div class="bg-black/50 border border-purple-500/20 p-4 rounded-xl space-y-2">
+              <strong class="text-purple-400 block font-bold text-sm">Zero-Knowledge State Proofs</strong>
+              <p class="font-sans text-slate-300">Transactions verify mathematical validity without revealing sender balances, recipient addresses, or transaction graph connections to public observers or MEV bots.</p>
             </div>
-            <h3 class="text-sm font-bold text-white">Stateless Executable Programs</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              Smart contracts on Lunul are read-only programs containing immutable bytecode. They accept instructions, execute business logic, and mutate state externally.
-            </p>
-          </div>
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <div class="w-8 h-8 rounded-lg bg-indigo-950 flex items-center justify-center text-indigo-400">
-              <i class="fa-solid fa-vault"></i>
-            </div>
-            <h3 class="text-sm font-bold text-white">Isolated Data Accounts</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              All runtime variables, user balances, and application data reside inside discrete storage accounts owned by specific programs.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- 5. Consensus -->
-      <section id="consensus" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Proof-of-State Consensus & VDFs</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Lunul utilizes an optimized BFT consensus mechanism powered by cryptographic Verifiable Delay Functions (VDFs). This establishes a tamper-proof historical record of time without requiring validators to continuously gossip with one another.
-        </p>
-
-        <div class="cardBg border border-white/10 rounded-2xl p-6 space-y-4">
-          <h3 class="text-xs font-mono-code font-bold text-purple-300 uppercase tracking-wider">Network Performance Parameters</h3>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-code">
-            <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">FINALITY TIME</div>
-              <div class="text-lg font-bold text-white">&lt; 400ms</div>
-            </div>
-            <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">PEAK THROUGHPUT</div>
-              <div class="text-lg font-bold text-white">65,000 TPS</div>
-            </div>
-            <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">SLOT DURATION</div>
-              <div class="text-lg font-bold text-white">200ms</div>
-            </div>
-            <div class="bg-black/40 border border-white/5 p-4 rounded-xl">
-              <div class="text-[10px] text-slate-500 mb-1">ACTIVE VALIDATORS</div>
-              <div class="text-lg font-bold text-white">1,450+</div>
+            <div class="bg-black/50 border border-purple-500/20 p-4 rounded-xl space-y-2">
+              <strong class="text-purple-400 block font-bold text-sm">Seamless Solidity Integration</strong>
+              <p class="font-sans text-slate-300">Deploy standard smart contracts written in Solidity with zero code modifications, instantly enabling confidential asset transfers and private DeFi liquidity.</p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 6. Account & Rent Model -->
-      <section id="accounts" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Account & Rent Model</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          In Lunul, everything is stored in accounts—ranging from user wallets and token balances to deployed smart contract code and oracle feeds.
-        </p>
-        <div class="cardBg border border-white/10 rounded-2xl p-6 space-y-4">
-          <h3 class="text-xs font-mono-code font-bold text-white">State Rent Exemption Mechanics</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            To prevent state bloat, accounts maintain a minimum balance exempting them from rent fees. If an account's balance falls below the rent-exempt threshold due to manual withdrawal, it is purged from validator RAM by the garbage collection daemon.
+      <!-- SECTION 3: WALLET VPN & ANONYMITY -->
+      <section id="vpn-wallet" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">2.</span>
+          <span>Wallet VPN & Enterprise Anonymity</span>
+        </h2>
+        <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            Lunul acts as a secure cryptographic tunnel—a <strong class="text-white">VPN for your wallet</strong>. For corporations managing treasuries and banks executing institutional settlements, financial surveillance creates severe security risks.
+          </p>
+          <p>
+            By leveraging cryptographic blinding factors and Pedersen commitments, Lunul shields all transaction payloads. External blockchain explorers see only verified zero-knowledge proofs, effectively anonymizing the underlying business operations while maintaining strict regulatory compliance capability.
           </p>
         </div>
       </section>
 
-      <!-- 7. Parallel Transaction Engine -->
-      <section id="parallel-runtime" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Parallel Transaction Execution Engine</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Traditional blockchains process transactions sequentially, creating severe bottlenecks. Lunul implements a concurrency engine modeled after database concurrency control systems.
-        </p>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Transactions that do not overlap in their account state dependencies are processed concurrently across multi-core validator CPUs, allowing non-conflicting decentralized exchanges, lending pools, and NFT marketplaces to execute simultaneously in the exact same block.
-        </p>
-      </section>
-
-      <!-- 8. Validator Hardware Requirements -->
-      <section id="validator-reqs" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Validator Hardware Requirements</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Running a consensus validator node on Lunul requires enterprise-grade hardware to ensure high-speed state verification and block propagation across global relay networks.
-        </p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono-code text-xs">
-          <div class="cardBg border border-white/10 rounded-2xl p-5 space-y-3">
-            <h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-server text-purple-400"></i> Minimum Spec</h3>
-            <ul class="space-y-2 text-slate-400">
-              <li>• CPU: 16 Cores / 32 Threads @ 3.2GHz</li>
-              <li>• RAM: 128GB ECC DDR5</li>
-              <li>• Storage: 2TB NVMe PCIe 4.0 SSD</li>
-              <li>• Network: 1 Gbps Dedicated Uplink</li>
-            </ul>
-          </div>
-          <div class="cardBg border border-purple-500/30 rounded-2xl p-5 space-y-3">
-            <h3 class="text-white font-bold flex items-center gap-2"><i class="fa-solid fa-microchip text-emerald-400"></i> Recommended Spec</h3>
-            <ul class="space-y-2 text-slate-400">
-              <li>• CPU: 32 Cores / 64 Threads @ 3.8GHz+</li>
-              <li>• RAM: 256GB ECC DDR5</li>
-              <li>• Storage: 4TB Enterprise NVMe (U.2)</li>
-              <li>• Network: 10 Gbps Low-Latency Uplink</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- 9. Staking & Slashing -->
-      <section id="staking" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Delegation & Slashing Mechanics</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Token holders can delegate their $LUN tokens to any active validator without relinquishing custody. Validators sign blocks on behalf of their delegators and distribute proportional block rewards.
-        </p>
-        <div class="cardBg border border-white/10 rounded-2xl p-6 space-y-2">
-          <h3 class="text-xs font-mono-code font-bold text-white">Slashing Conditions</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Automatic protocol slashing triggers if a validator signs conflicting state transitions (double-signing) or attempts consensus manipulation, resulting in an immediate burn of up to 10% of staked collateral.
+      <!-- SECTION 4: VALIDATOR OPERATIONS -->
+      <section id="hardware" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">3.</span>
+          <span>Validator Hardware & BFT Consensus</span>
+        </h2>
+        <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            Running a consensus validator node on the Null Net protocol requires enterprise-grade infrastructure to verify zero-knowledge proofs and maintain high-speed state synchronization.
           </p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono-code text-xs pt-2">
+            <div class="bg-black/40 border border-white/5 rounded-2xl p-5 space-y-2">
+              <span class="text-purple-400 font-bold uppercase tracking-wider block">Minimum Spec</span>
+              <ul class="space-y-1 text-slate-300 font-sans">
+                <li>• CPU: 16 Cores / 32 Threads @ 3.2GHz</li>
+                <li>• RAM: 128GB ECC DDR5</li>
+                <li>• Storage: 2TB NVMe PCIe 4.0 SSD</li>
+                <li>• Network: 1 Gbps Dedicated Uplink</li>
+              </ul>
+            </div>
+            <div class="bg-black/40 border border-white/5 rounded-2xl p-5 space-y-2">
+              <span class="text-emerald-400 font-bold uppercase tracking-wider block">Recommended Spec</span>
+              <ul class="space-y-1 text-slate-300 font-sans">
+                <li>• CPU: 32 Cores / 64 Threads @ 3.8GHz+</li>
+                <li>• RAM: 256GB ECC DDR5</li>
+                <li>• Storage: 4TB Enterprise NVMe (U.2)</li>
+                <li>• Network: 10 Gbps Low-Latency Uplink</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- 10. Smart Contracts -->
-      <section id="smart-contracts" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Smart Contract Environment</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Lunul supports high-performance smart contracts compiled down to optimized eBPF bytecode. Developers can write secure decentralized applications utilizing robust system primitives.
-        </p>
-      </section>
+      <!-- SECTION 5: SMART CONTRACT ENVIRONMENT -->
+      <section id="smart-contracts" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+          <span class="text-purple-400">4.</span>
+          <span>Shielded Solidity Smart Contract Environment</span>
+        </h2>
+        <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p>
+            Developers can deploy secure, confidential smart contracts using standard EVM bytecode. All state variables are protected under zero-knowledge encryption primitives, ensuring complete isolation from data scrapers.
+          </p>
+          
+          <!-- CODE SNIPPET (SECURE, NO USER DATA) -->
+          <div class="bg-black/80 border border-white/10 rounded-2xl p-5 font-mono-code text-xs text-purple-300 space-y-2">
+            <div class="text-slate-500 text-[10px]">ShieldedVault.sol • Solidity 0.8.24</div>
+            <pre class="overflow-x-auto text-slate-300"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
 
-      <!-- 11. SDK & Code Example -->
-      <section id="sdk" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Lunul SDK Quickstart</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          Interact with the Lunul network programmatically using the official TypeScript client library to deploy accounts, query state, and submit signed transactions.
-        </p>
+import "@lunul/zk-evm/contracts/ShieldedState.sol";
 
-        <!-- Code Block Component -->
-        <div class="rounded-2xl bg-black border border-white/10 overflow-hidden shadow-2xl font-mono-code text-xs">
-          <div class="bg-zinc-900 px-4 py-3 border-b border-white/10 flex justify-between items-center text-slate-400">
-            <span class="flex items-center gap-2"><i class="fa-brands fa-js text-amber-400"></i> client_transfer.ts</span>
-            <span class="text-[10px] text-purple-400">TypeScript v6.2</span>
-          </div>
-          <pre class="p-5 overflow-x-auto text-slate-300 leading-relaxed"><code><span class="text-purple-400">import</span> { LunulClient, clusterApiUrl, LAMPORTS_PER_LUN } <span class="text-purple-400">from</span> <span class="text-emerald-300">'@lunul/web3.js'</span>;
+contract InstitutionalVault is ShieldedState {
+    mapping(bytes32 => uint256) private shieldedBalances;
 
-<span class="text-slate-500">// Initialize connection to Lunul Mainnet-Beta RPC cluster</span>
-<span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> <span class="text-amber-300">LunulClient</span>(<span class="text-amber-300">clusterApiUrl</span>(<span class="text-emerald-300">'mainnet-beta'</span>));
-
-<span class="text-purple-400">async function</span> <span class="text-blue-400">executeTransfer</span>(senderWallet, recipientKey) {
-  <span class="text-purple-400">const</span> transferAmount = LAMPORTS_PER_LUN / <span class="text-orange-400">10n</span>; <span class="text-slate-500">// 0.1 LUN</span>
-  
-  <span class="text-purple-400">const</span> txSignature = <span class="text-purple-400">await</span> client.<span class="text-blue-300">transferSOL</span>({
-    sender: senderWallet,
-    recipient: recipientKey,
-    lamports: transferAmount,
-    commitment: <span class="text-emerald-300">'confirmed'</span>
-  });
-
-  <span class="text-blue-400">console</span>.<span class="text-blue-300">log</span>(<span class="text-emerald-300">`Transaction confirmed with signature: ${txSignature}`</span>);
+    function depositEncrypted(bytes32 commitment) external payable {
+        require(msg.value > 0, "Zero deposit");
+        _verifyPedersenCommitment(commitment, msg.value);
+        shieldedBalances[commitment] += msg.value;
+    }
 }</code></pre>
+          </div>
         </div>
       </section>
 
-      <!-- 12. Security -->
-      <section id="security" class="space-y-6 pt-6 border-t border-white/10">
-        <h2 class="text-2xl font-extrabold text-white tracking-tight">Security Audits & Testing Best Practices</h2>
-        <p class="text-slate-300 text-sm leading-relaxed">
-          All core programs maintained by the Lunul Foundation (LF) undergo rigorous formal verification and multi-firm cryptographic audits by top-tier security labs prior to mainnet deployment. Developers are advised to utilize the Lunul localnet test validator suite for end-to-end integration testing.
-        </p>
-      </section>
+    </div>
 
-    </main>
+  </main>
 
-  </div>
-
-  <!-- Shared Footer -->
-  <footer class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-8 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-mono-code text-slate-500">
-    <div>&copy; 2026 Lunul Foundation (LF). All rights reserved.</div>
-    <div class="flex items-center gap-6">
-      <a href="https://lunul.org" class="hover:text-white transition">Ecosystem</a>
-      <a href="https://whitepaper.lunul.org" class="hover:text-white transition">Whitepaper</a>
-      <a href="https://app.lunul.org" class="hover:text-white transition">Battlepass</a>
-      <a href="https://x.com/lunulfoundation" class="hover:text-white transition"><i class="fa-brands fa-x-twitter"></i> X (Twitter)</a>
+  <!-- FOOTER -->
+  <footer class="border-t border-white/15 py-8 text-center text-xs text-slate-500 font-mono-code">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>&copy; 2026 Lunul Foundation (LF). All rights reserved.</div>
+      <div class="flex items-center space-x-6">
+        <a href="https://docs.lunul.org" class="hover:text-white transition">Docs</a>
+        <a href="https://whitepaper.lunul.org" class="hover:text-white transition">Whitepaper</a>
+        <a href="https://portal.lunul.org" class="hover:text-white transition">Portal</a>
+        <a href="https://x.com" target="_blank" class="hover:text-white transition">X (Twitter)</a>
+      </div>
     </div>
   </footer>
 
+  <script>
+    function toggleMobileMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+  </script>
 </body>
 </html>
