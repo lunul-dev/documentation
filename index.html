@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lunul Foundation | Technical Documentation</title>
+  <title>Lunul Foundation | Enterprise Protocol Specification & Developer Docs</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: { purple: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' } } } } }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
     html { scroll-behavior: smooth; }
@@ -18,7 +18,7 @@
 <body class="bg-black text-slate-100 min-h-screen selection:bg-purple-500 selection:text-white flex flex-col justify-between overflow-x-hidden">
 
   <!-- EXACT MATCH GLOBAL HEADER NAVIGATION -->
-  <header class="border-b border-white/10 bg-black/80 backdrop-blur sticky top-0 z-50">
+  <header class="border-b border-white/10 bg-black/90 backdrop-blur sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center space-x-6">
         <a href="https://lunul.org/index.html" class="flex items-center space-x-3">
@@ -30,7 +30,7 @@
         <nav class="hidden lg:flex items-center space-x-1 font-mono-code text-xs">
           <a href="https://lunul.org/index.html#architecture" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Architecture</a>
           <a href="https://lunul.org/index.html#use-cases" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
-          <a href="https://docs.lunul.org" class="px-3 py-2 rounded-lg bg-white/10 text-white transition">Docs</a>
+          <a href="https://docs.lunul.org" class="px-3 py-2 rounded-lg bg-white/10 text-white font-bold transition">Docs</a>
           <a href="https://whitepaper.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Whitepaper</a>
           <a href="https://portal.lunul.org" class="px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Portal</a>
         </nav>
@@ -54,7 +54,7 @@
     <div id="mobile-menu" class="hidden lg:hidden bg-zinc-950 border-b border-white/10 px-6 py-4 space-y-2 font-mono-code text-xs">
       <a href="https://lunul.org/index.html#architecture" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Architecture</a>
       <a href="https://lunul.org/index.html#use-cases" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Ecosystem & Use Cases</a>
-      <a href="https://docs.lunul.org" class="block px-3 py-2 rounded-lg bg-white/10 text-white transition">Docs</a>
+      <a href="https://docs.lunul.org" class="block px-3 py-2 rounded-lg bg-white/10 text-white font-bold transition">Docs</a>
       <a href="https://whitepaper.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Whitepaper</a>
       <a href="https://portal.lunul.org" class="block px-3 py-2 rounded-lg text-slate-300 hover:text-white hover:bg-white/5 transition">Portal</a>
     </div>
@@ -66,29 +66,37 @@
     <!-- SIDEBAR NAVIGATION -->
     <aside class="hidden lg:block space-y-6 font-mono-code text-xs sticky top-24 h-[calc(100vh-7rem)] overflow-y-auto pr-4 border-r border-white/10">
       <div class="space-y-1">
-        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Getting Started</div>
-        <a href="#intro" class="block px-3 py-2 rounded-lg bg-white/5 text-white transition">Introduction to Lunul</a>
-        <a href="#principles" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Core Design Principles</a>
-        <a href="#evm-zk" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">EVM & ZK-UTXO Privacy</a>
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">01. Protocol Vision</div>
+        <a href="#intro" class="block px-3 py-2 rounded-lg bg-white/5 text-white font-semibold transition">Introduction to Lunul</a>
+        <a href="#principles" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Pillars of Privacy</a>
+        <a href="#live-spec" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Live Network Benchmarks</a>
       </div>
 
       <div class="space-y-1 pt-2">
-        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Protocol Mechanics</div>
-        <a href="#vpn-wallet" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Wallet VPN & Anonymity</a>
-        <a href="#state-rent" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">State Rent & Storage</a>
-        <a href="#consensus" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">BFT Consensus & Fees</a>
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">02. Cryptographic Stack</div>
+        <a href="#evm-zk" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Dual-State Architecture</a>
+        <a href="#vpn-wallet" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Wallet VPN & IP Concealment</a>
+        <a href="#pedersen" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Pedersen & AES-GCM Payloads</a>
       </div>
 
       <div class="space-y-1 pt-2">
-        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Validator Operations</div>
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">03. Network Mechanics</div>
+        <a href="#consensus" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Clique BFT Consensus</a>
+        <a href="#state-rent" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">State Rent & Storage Pruning</a>
+        <a href="#gas-treasury" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">LUN Gas & Treasury Routing</a>
+      </div>
+
+      <div class="space-y-1 pt-2">
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">04. Validator Operations</div>
         <a href="#hardware" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Hardware Requirements</a>
-        <a href="#slashing" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Delegation & Slashing</a>
+        <a href="#node-init" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Node Initialization</a>
+        <a href="#slashing" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Slashing & Security Rules</a>
       </div>
 
       <div class="space-y-1 pt-2">
-        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">Developer Stack</div>
-        <a href="#smart-contracts" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Shielded Solidity & EVM</a>
-        <a href="#zk-circuits" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">ZK Circuit Integration</a>
+        <div class="text-[10px] font-bold text-purple-400 uppercase tracking-widest px-3 py-2">05. Developer Stack</div>
+        <a href="#smart-contracts" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Shielded EVM Contracts</a>
+        <a href="#paris-target" class="block px-3 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition">Paris EVM & PUSH0 Guard</a>
       </div>
     </aside>
 
@@ -96,158 +104,331 @@
     <div class="lg:col-span-3 space-y-12">
       
       <!-- HERO BANNER -->
-      <div class="relative overflow-hidden rounded-3xl bg-zinc-950/60 backdrop-blur-xl border border-white/10 p-8 sm:p-12 space-y-4 shadow-2xl shadow-purple-500/10">
-        <div class="absolute -right-20 -top-20 w-64 h-64 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="relative z-10 space-y-3 font-mono-code">
-          <span class="text-xs font-bold text-purple-400 uppercase tracking-widest bg-purple-500/10 border border-purple-500/20 px-3 py-1 rounded-full inline-block">
-            DEVELOPER & PROTOCOL DOCUMENTATION
-          </span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+      <div class="relative overflow-hidden rounded-3xl bg-zinc-950/80 backdrop-blur-xl border border-white/10 p-8 sm:p-12 space-y-6 shadow-2xl shadow-purple-500/10">
+        <div class="absolute -right-20 -top-20 w-80 h-80 bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10 space-y-4 font-mono-code">
+          <div class="flex items-center space-x-3">
+            <span class="flex h-3 w-3 relative">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+            </span>
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full">
+              LIVE NETWORK OPERATIONAL // CHAIN ID: 448000
+            </span>
+          </div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
             Lunul Foundation Documentation
           </h1>
-          <p class="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed max-w-2xl">
-            Comprehensive technical guides for building confidential decentralized applications, deploying EVM smart contracts, and utilizing corporate privacy-as-a-service on the Null Net protocol.
+          <p class="text-xs sm:text-base text-slate-300 font-sans leading-relaxed max-w-3xl">
+            The definitive developer guide and architectural reference for deploying shielded Solidity smart contracts, operating high-throughput validator infrastructure, and leveraging corporate privacy-as-a-service on the live NullNet execution engine.
           </p>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 font-mono-code border-t border-white/10 text-xs">
+          <div>
+            <span class="text-slate-500 block">RPC Provider:</span>
+            <span class="text-purple-300 font-bold">http://16.171.242.167:8545</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block">EVM Ruleset:</span>
+            <span class="text-purple-300 font-bold">Paris (solc 0.8.20)</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block">Native Gas Token:</span>
+            <span class="text-emerald-400 font-bold">LUN (18 Decimals)</span>
+          </div>
+          <div>
+            <span class="text-slate-500 block">Consensus Engine:</span>
+            <span class="text-purple-300 font-bold">Clique Proof-of-Authority</span>
+          </div>
         </div>
       </div>
 
-      <!-- SECTION 1 -->
+      <!-- SECTION 1: INTRODUCTION & PILLARS -->
       <section id="intro" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">#</span>
-          <span>Introduction to Lunul Foundation</span>
-        </h2>
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+            <span class="text-purple-400">01.</span>
+            <span>Introduction to Lunul Foundation & NullNet</span>
+          </h2>
+          <span class="text-xs font-mono-code text-purple-400 bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">Protocol Spec v2.4</span>
+        </div>
+
         <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
           <p>
-            <strong class="text-white">Lunul Foundation (LF)</strong> is an institutional-grade, private EVM Layer-1 blockchain protocol designed specifically as a corporate privacy-as-a-service provider. Operating as a secure <strong class="text-purple-400">VPN for your wallet</strong>, Lunul empowers banks, corporations, DAOs, and high-net-worth entities with lightning-fast transaction execution paired with absolute financial confidentiality.
+            <strong class="text-white">Lunul Foundation (LF)</strong> architects and governs the <strong class="text-purple-400">NullNet protocol</strong>—an institutional-grade, privacy-centric blockchain network engineered specifically to solve the existential trade-offs between public ledger transparency, corporate confidentiality, and high-performance throughput. Operating as a cryptographic <strong class="text-white font-mono">"VPN for your Web3 Wallet"</strong>, NullNet completely isolates user identities, account balances, and contract invocation flows from public surveillance algorithms, state-level monitoring, and competitive intelligence harvesting.
           </p>
           <p>
-            By combining full Ethereum Virtual Machine (EVM) compatibility with zero-knowledge UTXO (ZK-UTXO) circuits and Pedersen commitments, developers can deploy standard Solidity contracts that execute under complete cryptographic shielding.
+            Public networks like Ethereum, Solana, and Arbitrum broadcast every account state change, wallet balance, and contract parameter directly to public indexers, MEV sandwich bots, and address-clustering firms. For multinational corporations, financial institutions, DAOs managing treasury funds, and high-net-worth individuals, this total transparency creates unacceptable security vulnerabilities, front-running losses, and commercial intelligence leaks.
+          </p>
+          <p>
+            NullNet addresses these systemic vulnerabilities by combining a native <strong class="text-white">Paris EVM execution runtime (Chain ID 448000)</strong> with a parallelized zero-knowledge UTXO (<strong class="text-purple-400">ZK-UTXO</strong>) shielding pool. Developers can seamlessly deploy standard Solidity smart contracts that execute with deterministic BFT finality under complete end-to-end cryptographic shielding.
           </p>
         </div>
 
-        <!-- NETWORK PARAMETERS GRID -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 font-mono-code text-center">
-          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
-            <span class="text-[10px] text-slate-400 uppercase">Finality Time</span>
-            <div class="text-xl font-extrabold text-purple-400">&lt; 400ms</div>
+        <!-- THREE PILLARS GRID -->
+        <div id="principles" class="pt-4 space-y-4">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Core Architectural Pillars</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono-code text-xs">
+            <div class="bg-black/60 border border-purple-500/20 rounded-2xl p-5 space-y-2">
+              <span class="text-purple-400 font-bold block text-sm">1. Total Payload Shielding</span>
+              <p class="font-sans text-slate-300 text-xs leading-relaxed">
+                Transaction parameters, transfer quantities, and address relationships are encrypted via AES-GCM and signed using Ed25519 keypairs before entering the validator P2P gossip layer.
+              </p>
+            </div>
+            <div class="bg-black/60 border border-purple-500/20 rounded-2xl p-5 space-y-2">
+              <span class="text-purple-400 font-bold block text-sm">2. Turnkey EVM Tooling</span>
+              <p class="font-sans text-slate-300 text-xs leading-relaxed">
+                Write standard Solidity code using Remix, Hardhat, or Foundry targeting the Paris hardfork without needing custom ZK domain-specific languages or exotic virtual machines.
+              </p>
+            </div>
+            <div class="bg-black/60 border border-purple-500/20 rounded-2xl p-5 space-y-2">
+              <span class="text-purple-400 font-bold block text-sm">3. Sub-400ms BFT Finality</span>
+              <p class="font-sans text-slate-300 text-xs leading-relaxed">
+                The Geth-derived Clique Proof-of-Authority engine delivers instant, non-revertible block finality in under 400 milliseconds, eliminating MEV reorgs and front-running.
+              </p>
+            </div>
           </div>
-          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
-            <span class="text-[10px] text-slate-400 uppercase">Peak TPS</span>
-            <div class="text-xl font-extrabold text-white">100,000+</div>
-          </div>
-          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
-            <span class="text-[10px] text-slate-400 uppercase">Confidentiality</span>
-            <div class="text-xl font-extrabold text-emerald-400">100% ZK</div>
-          </div>
-          <div class="bg-black/40 border border-white/5 rounded-2xl p-4 space-y-1">
-            <span class="text-[10px] text-slate-400 uppercase">EVM Status</span>
-            <div class="text-xl font-extrabold text-purple-300">Native</div>
+        </div>
+
+        <!-- LIVE BENCHMARKS -->
+        <div id="live-spec" class="pt-4 space-y-3">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Live Network Performance Benchmarks</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 font-mono-code text-center">
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase">Block Time / Finality</span>
+              <div class="text-xl font-extrabold text-purple-400">&lt; 400ms</div>
+              <span class="text-[9px] text-slate-500 block">Instant BFT Seal</span>
+            </div>
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase">Peak Network TPS</span>
+              <div class="text-xl font-extrabold text-white">100,000+</div>
+              <span class="text-[9px] text-slate-500 block">Parallelized Pipeline</span>
+            </div>
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase">Confidentiality</span>
+              <div class="text-xl font-extrabold text-emerald-400">100% ZK-UTXO</div>
+              <span class="text-[9px] text-slate-500 block">Pedersen Shielding</span>
+            </div>
+            <div class="bg-black/40 border border-white/10 rounded-2xl p-4 space-y-1">
+              <span class="text-[10px] text-slate-400 uppercase">EVM Target</span>
+              <div class="text-xl font-extrabold text-purple-300">Paris (solc 0.8.20)</div>
+              <span class="text-[9px] text-slate-500 block">PUSH0 Safe</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 2: EVM & ZK-UTXO PRIVACY -->
+      <!-- SECTION 2: CRYPTOGRAPHIC STACK -->
       <section id="evm-zk" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">1.</span>
-          <span>EVM Compatibility & ZK-UTXO Privacy Circuits</span>
-        </h2>
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+            <span class="text-purple-400">02.</span>
+            <span>Cryptographic Stack & Dual-State Architecture</span>
+          </h2>
+          <span class="text-xs font-mono-code text-slate-400">Hybrid Account & UTXO Engine</span>
+        </div>
+
         <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
           <p>
-            Legacy privacy chains often force developers to learn custom virtual machines or exotic programming languages. Lunul bridges this gap by offering native EVM runtime support combined with zero-knowledge circuits.
+            Legacy privacy networks routinely force developers into stark, uninviting choices: either write logic in obscure, unproven domain-specific languages (like Cairo, Noir, or Leo), or sacrifice private state management altogether. NullNet resolves this dilemma by pairing a full EVM account state machine with a parallel zero-knowledge UTXO engine:
           </p>
-          <div class="space-y-3 font-mono-code text-xs pt-2">
-            <div class="bg-black/50 border border-purple-500/20 p-4 rounded-xl space-y-2">
-              <strong class="text-purple-400 block font-bold text-sm">Zero-Knowledge State Proofs</strong>
-              <p class="font-sans text-slate-300">Transactions verify mathematical validity without revealing sender balances, recipient addresses, or transaction graph connections to public observers or MEV bots.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono-code text-xs pt-2">
+            <div class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-2">
+              <strong class="text-purple-400 block font-bold text-sm">Account State Engine (Paris EVM)</strong>
+              <p class="font-sans text-slate-300 leading-relaxed text-xs">
+                Executes complex smart contract bytecode, manages ERC-20 token logic, handles DEX liquidity pools, and processes automated state transitions using standard Solidity semantics.
+              </p>
             </div>
-            <div class="bg-black/50 border border-purple-500/20 p-4 rounded-xl space-y-2">
-              <strong class="text-purple-400 block font-bold text-sm">Seamless Solidity Integration</strong>
-              <p class="font-sans text-slate-300">Deploy standard smart contracts written in Solidity with zero code modifications, instantly enabling confidential asset transfers and private DeFi liquidity.</p>
+            <div class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-2">
+              <strong class="text-emerald-400 block font-bold text-sm">Shielded UTXO Engine (ZK-SNARK)</strong>
+              <p class="font-sans text-slate-300 leading-relaxed text-xs">
+                Processes blind token transfers, verifies Pedersen commitments, manages nullifier trees, and shields transaction graph data from external observers.
+              </p>
             </div>
+          </div>
+        </div>
+
+        <div id="vpn-wallet" class="space-y-3 pt-2">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Wallet VPN & IP Concealment Protocol</h3>
+          <p class="font-sans text-slate-300 text-sm leading-relaxed">
+            When users connect Web3 provider extensions (such as MetaMask or Phantom) to the NullNet JSON-RPC endpoint (<code class="text-purple-300 font-mono">http://16.171.242.167:8545</code>), all outbound RPC queries, gas estimations, and signed transactions are wrapped inside an encrypted WebSocket gossip protocol. The client acts as an ephemeral node participant, shielding user IP addresses, geographic metadata, and local balance records behind randomized validator relays.
+          </p>
+        </div>
+
+        <div id="pedersen" class="space-y-3 pt-2">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Pedersen Commitments & Homomorphic Encryption</h3>
+          <div class="bg-black/80 border border-purple-500/20 p-5 rounded-2xl space-y-3 font-mono-code text-xs">
+            <p class="text-purple-300">Mathematical Value Commitment Equation:</p>
+            <div class="bg-zinc-950 border border-white/10 p-3 rounded-xl text-emerald-400 text-center font-bold text-sm">
+              C = r · G + v · H
+            </div>
+            <p class="text-slate-400 font-sans text-xs leading-relaxed">
+              Where <code class="text-purple-300 font-mono">v</code> represents the confidential transaction value, <code class="text-purple-300 font-mono">r</code> is a cryptographically secure 256-bit blinding factor, and <code class="text-purple-300 font-mono">G, H</code> are fixed generator points on the Curve25519 / Ed25519 elliptic curve. Consensus validators verify that input commitments strictly balance output commitments without ever revealing <code class="text-purple-300 font-mono">v</code> to the public ledger.
+            </p>
           </div>
         </div>
       </section>
 
-      <!-- SECTION 3: WALLET VPN & ANONYMITY -->
-      <section id="vpn-wallet" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">2.</span>
-          <span>Wallet VPN & Enterprise Anonymity</span>
-        </h2>
+      <!-- SECTION 3: CONSENSUS, FEES & STATE RENT -->
+      <section id="consensus" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+            <span class="text-purple-400">03.</span>
+            <span>Clique BFT Consensus, Fees & State Rent</span>
+          </h2>
+          <span class="text-xs font-mono-code text-slate-400">Geth / Go-Ethereum Core</span>
+        </div>
+
         <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
           <p>
-            Lunul acts as a secure cryptographic tunnel—a <strong class="text-white">VPN for your wallet</strong>. For corporations managing treasuries and banks executing institutional settlements, financial surveillance creates severe security risks.
+            NullNet operates a customized <strong class="text-white">Go-Ethereum (Geth) Clique Proof-of-Authority (PoA)</strong> engine optimized specifically for sub-second block creation and zero-reorg block confirmation. Genesis parameters enforce <strong class="text-purple-400 font-mono">Chain ID 448000</strong> across all active validator nodes.
           </p>
-          <p>
-            By leveraging cryptographic blinding factors and Pedersen commitments, Lunul shields all transaction payloads. External blockchain explorers see only verified zero-knowledge proofs, effectively anonymizing the underlying business operations while maintaining strict regulatory compliance capability.
-          </p>
+        </div>
+
+        <div id="state-rent" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2 font-mono-code text-xs">
+          <div class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-3">
+            <h3 class="text-sm font-bold text-purple-400 uppercase">// State Rent & Pruning Protocols</h3>
+            <p class="font-sans text-slate-300 leading-relaxed text-xs">
+              To prevent unbounded state growth and keep node memory footprints fast, NullNet enforces a state storage rent mechanism. Active contract storage slots consume micro-fractions of native LUN per epoch. Stale or abandoned storage slots are automatically migrated to off-chain cold snapshots, preserving validator RAM for active transaction execution.
+            </p>
+          </div>
+          <div id="gas-treasury" class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-3">
+            <h3 class="text-sm font-bold text-purple-400 uppercase">// Gas Routing & Treasury Protocol</h3>
+            <p class="font-sans text-slate-300 leading-relaxed text-xs">
+              Transactions consume native LUN gas proportional to opcode complexity. Specialized wizard interactions and contract deployment tools route a flat platform fee (5.0 LUN) directly to the Lunul Foundation treasury wallet (<code class="text-purple-300 font-mono">0x8632fa855d5Dc6b59A3cF892d72CF4a94F182AAE</code>) to fund ongoing core protocol engineering and ecosystem grants.
+            </p>
+          </div>
         </div>
       </section>
 
       <!-- SECTION 4: VALIDATOR OPERATIONS -->
       <section id="hardware" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">3.</span>
-          <span>Validator Hardware & BFT Consensus</span>
-        </h2>
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+            <span class="text-purple-400">04.</span>
+            <span>Validator Hardware Specs & Node Orchestration</span>
+          </h2>
+          <span class="text-xs font-mono-code text-slate-400">Ubuntu 22.04 LTS / AWS EC2</span>
+        </div>
+
         <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
           <p>
-            Running a consensus validator node on the Null Net protocol requires enterprise-grade infrastructure to verify zero-knowledge proofs and maintain high-speed state synchronization.
+            Operating an active validator node on NullNet requires high-spec server hardware to manage concurrent RPC connections, process zero-knowledge proofs, and maintain low-latency state synchronizations.
           </p>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono-code text-xs pt-2">
-            <div class="bg-black/40 border border-white/5 rounded-2xl p-5 space-y-2">
-              <span class="text-purple-400 font-bold uppercase tracking-wider block">Minimum Spec</span>
-              <ul class="space-y-1 text-slate-300 font-sans">
-                <li>• CPU: 16 Cores / 32 Threads @ 3.2GHz</li>
-                <li>• RAM: 128GB ECC DDR5</li>
-                <li>• Storage: 2TB NVMe PCIe 4.0 SSD</li>
-                <li>• Network: 1 Gbps Dedicated Uplink</li>
+            <div class="bg-black/60 border border-white/10 rounded-2xl p-5 space-y-3">
+              <span class="text-purple-400 font-bold uppercase tracking-wider block text-sm">Minimum Production Specification</span>
+              <ul class="space-y-2 text-slate-300 font-sans text-xs">
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>CPU:</span> <strong class="text-white">16 Cores / 32 Threads @ 3.2GHz</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>RAM:</span> <strong class="text-white">128GB ECC DDR5</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>Storage:</span> <strong class="text-white">2TB NVMe PCIe 4.0 SSD</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>Network:</span> <strong class="text-white">1 Gbps Dedicated Uplink</strong></li>
+                <li class="flex justify-between"><span>OS Environment:</span> <strong class="text-white">Ubuntu 22.04 / 24.04 LTS</strong></li>
               </ul>
             </div>
-            <div class="bg-black/40 border border-white/5 rounded-2xl p-5 space-y-2">
-              <span class="text-emerald-400 font-bold uppercase tracking-wider block">Recommended Spec</span>
-              <ul class="space-y-1 text-slate-300 font-sans">
-                <li>• CPU: 32 Cores / 64 Threads @ 3.8GHz+</li>
-                <li>• RAM: 256GB ECC DDR5</li>
-                <li>• Storage: 4TB Enterprise NVMe (U.2)</li>
-                <li>• Network: 10 Gbps Low-Latency Uplink</li>
+            <div class="bg-black/60 border border-purple-500/30 rounded-2xl p-5 space-y-3">
+              <span class="text-emerald-400 font-bold uppercase tracking-wider block text-sm">High-Throughput Recommended Spec</span>
+              <ul class="space-y-2 text-slate-300 font-sans text-xs">
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>CPU:</span> <strong class="text-white">32 Cores / 64 Threads @ 3.8GHz+</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>RAM:</span> <strong class="text-white">256GB ECC DDR5</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>Storage:</span> <strong class="text-white">4TB Enterprise NVMe (U.2/U.3)</strong></li>
+                <li class="flex justify-between border-b border-white/5 pb-1"><span>Network:</span> <strong class="text-white">10 Gbps Low-Latency Uplink</strong></li>
+                <li class="flex justify-between"><span>Process Manager:</span> <strong class="text-white">PM2 / Systemd Service</strong></li>
               </ul>
             </div>
           </div>
         </div>
+
+        <!-- NODE INITIALIZATION SCRIPT -->
+        <div id="node-init" class="space-y-3 pt-2">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Quick-Start Validator Launch Command</h3>
+          <div class="bg-black/90 border border-white/10 rounded-2xl p-4 font-mono-code text-xs text-purple-300 overflow-x-auto">
+            <pre><code># 1. Initialize Genesis State for Chain ID 448000
+geth --datadir ./data init genesis.json
+
+# 2. Launch Geth Signer Node with HTTP RPC & WebSocket Enabled
+geth --datadir ./data \
+  --networkid 448000 \
+  --http --http.addr "0.0.0.0" --http.port 8545 \
+  --http.corsdomain "*" --http.vhosts "*" \
+  --ws --ws.addr "0.0.0.0" --ws.port 8546 \
+  --ws.origins "*" \
+  --mine --miner.etherbase "0xYOUR_VALIDATOR_ADDRESS" \
+  --unlock "0xYOUR_VALIDATOR_ADDRESS" --password ./password.txt</code></pre>
+          </div>
+        </div>
+
+        <div id="slashing" class="space-y-2 pt-2">
+          <h3 class="text-sm font-bold font-mono-code text-purple-400 uppercase tracking-wider">// Slashing & Validator Consensus Rules</h3>
+          <p class="font-sans text-slate-300 text-sm leading-relaxed">
+            Signers that attempt double-signing or broadcast blocks with invalid zero-knowledge proofs are automatically jailed by remaining Clique consensus validators. Validator seats are revoked, and delegated LUN stakes are subject to hard slashing.
+          </p>
+        </div>
       </section>
 
-      <!-- SECTION 5: SMART CONTRACT ENVIRONMENT -->
+      <!-- SECTION 5: DEVELOPER STACK & PARIS EVM -->
       <section id="smart-contracts" class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
-          <span class="text-purple-400">4.</span>
-          <span>Shielded Solidity Smart Contract Environment</span>
-        </h2>
+        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+          <h2 class="text-xl sm:text-2xl font-extrabold text-white font-mono-code flex items-center space-x-3">
+            <span class="text-purple-400">05.</span>
+            <span>Shielded Solidity & Compiler Guidelines</span>
+          </h2>
+          <span class="text-xs font-mono-code text-emerald-400">COMPILER COMPATIBILITY RULES</span>
+        </div>
+
         <div class="space-y-4 font-sans text-slate-300 text-sm sm:text-base leading-relaxed">
-          <p>
-            Developers can deploy secure, confidential smart contracts using standard EVM bytecode. All state variables are protected under zero-knowledge encryption primitives, ensuring complete isolation from data scrapers.
+          <p id="paris-target">
+            <strong class="text-white">MANDATORY COMPILER TARGET SETTING:</strong> NullNet is strictly locked to the <strong class="text-purple-400">Paris EVM hardfork</strong>. Default configurations in newer Solidity compilers (such as <code class="text-purple-300 font-mono">solc 0.8.20+</code>) target the Shanghai EVM, which emits the <code class="text-red-400 font-bold font-mono">PUSH0</code> opcode (<code class="text-purple-300 font-mono">0x5f</code>). Because NullNet enforces Paris rules, deploying bytecode that contains <code class="text-purple-300 font-mono">PUSH0</code> will result in node transaction execution failure (<code class="text-red-400 font-mono">invalid opcode</code>).
           </p>
           
-          <!-- CODE SNIPPET (SECURE, NO USER DATA) -->
-          <div class="bg-black/80 border border-white/10 rounded-2xl p-5 font-mono-code text-xs text-purple-300 space-y-2">
-            <div class="text-slate-500 text-[10px]">ShieldedVault.sol • Solidity 0.8.24</div>
-            <pre class="overflow-x-auto text-slate-300"><code>// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+          <div class="bg-black/80 border border-amber-500/30 p-4 rounded-2xl space-y-2 font-mono-code text-xs text-amber-300">
+            <p class="font-bold text-sm text-amber-400">⚠️ Required Solc Configuration Settings:</p>
+            <ul class="list-disc pl-5 space-y-1 text-slate-300 font-sans">
+              <li><strong>Solidity Version:</strong> <code class="text-purple-300 font-mono">0.8.20</code> (or lower)</li>
+              <li><strong>EVM Target:</strong> <code class="text-emerald-400 font-bold font-mono">paris</code> (Manually set in Remix, Hardhat, or Foundry)</li>
+              <li><strong>Optimizer:</strong> Enabled (200 Runs)</li>
+            </ul>
+          </div>
 
-import "@lunul/zk-evm/contracts/ShieldedState.sol";
+          <!-- CODE SNIPPET -->
+          <div class="space-y-2 pt-2">
+            <div class="flex justify-between items-center text-xs font-mono-code">
+              <span class="text-slate-400">Standard Managed Token Contract Example</span>
+              <span class="text-purple-400">Solidity v0.8.20 (Paris EVM)</span>
+            </div>
+            <div class="bg-black/90 border border-white/10 rounded-2xl p-5 font-mono-code text-xs text-purple-300 overflow-x-auto space-y-2 shadow-inner">
+              <pre class="text-slate-300"><code>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-contract InstitutionalVault is ShieldedState {
-    mapping(bytes32 => uint256) private shieldedBalances;
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-    function depositEncrypted(bytes32 commitment) external payable {
-        require(msg.value > 0, "Zero deposit");
-        _verifyPedersenCommitment(commitment, msg.value);
-        shieldedBalances[commitment] += msg.value;
+/**
+ * @title NullNet Standard Shielded Managed Token
+ * @notice Compiled specifically for Chain ID 448000 under Paris EVM target rules.
+ */
+contract CustomManagedToken is ERC20, ERC20Burnable, Ownable {
+    
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 initialSupply
+    ) ERC20(name, symbol) Ownable(msg.sender) {
+        // Mint initial token supply directly to deployer wallet
+        _mint(msg.sender, initialSupply * (10 ** decimals()));
+    }
+
+    /**
+     * @notice Allows owner to mint additional tokens post-deployment
+     */
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
     }
 }</code></pre>
+            </div>
           </div>
         </div>
       </section>
@@ -259,12 +440,12 @@ contract InstitutionalVault is ShieldedState {
   <!-- FOOTER -->
   <footer class="border-t border-white/15 py-8 text-center text-xs text-slate-500 font-mono-code">
     <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div>&copy; 2026 Lunul Foundation (LF). All rights reserved.</div>
+      <div>&copy; 2026 Lunul Foundation (LF). NullNet Shielded Architecture. All rights reserved.</div>
       <div class="flex items-center space-x-6">
         <a href="https://docs.lunul.org" class="hover:text-white transition">Docs</a>
         <a href="https://whitepaper.lunul.org" class="hover:text-white transition">Whitepaper</a>
         <a href="https://portal.lunul.org" class="hover:text-white transition">Portal</a>
-        <a href="https://x.com" target="_blank" class="hover:text-white transition">X (Twitter)</a>
+        <a href="https://portal.lunul.org/creator.html" class="hover:text-white transition">IDE Workspace</a>
       </div>
     </div>
   </footer>
