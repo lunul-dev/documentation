@@ -79,7 +79,6 @@ geth --datadir ./data \
 </section>
 <section class="doc-card" id="solidity"><div class="card-head"><div class="card-title"><span class="num">05</span><h2>Solidity compiler &amp; EVM compatibility</h2></div><span class="pill">Paris EVM target</span></div>
 <div class="prose"><p>NullNet targets the Paris EVM ruleset. Contracts must be compiled explicitly for the Paris target to ensure full execution compatibility across all validator nodes.</p></div>
-<div class="callout"><strong>Build best practice:</strong> Pin your Solidity compiler version, explicitly set <code>evmVersion: "paris"</code> in your configuration files, and test deployed bytecode against active client builds prior to mainnet release.</div>
 <div class="code-head"><span>Hardhat configuration</span><span>EVM target setup</span></div><div class="codeblock"><pre><code><span class="kw">module.exports</span> = {
   solidity: {
     version: <span class="str">"0.8.20"</span>,
